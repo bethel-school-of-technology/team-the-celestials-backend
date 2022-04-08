@@ -26,10 +26,16 @@ module.exports = (sequelize, DataTypes) => {
     ingridients: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    price: {
+      type: DataTypes.DICEMAL,
+      allowNull: true
+    },
   }, {
     sequelize,
     modelName: 'coffees',
   });
   return coffees;
 };
+
+//Added price to coffee models UIR
