@@ -1,5 +1,3 @@
-// running sequelize init it created 3 folders. Config, migrations, and models. UIR
-
 'use strict';
 
 const fs = require('fs');
