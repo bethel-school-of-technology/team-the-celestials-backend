@@ -14,14 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     //   foreignKey:'id'
     // })
     }
-<<<<<<< HEAD
-  }
-  coffees.init({
-    coffee - _id: DataTypes.INTEGER,
-    nameOfCoffee: DataTypes.STRING,
-    ingridients: DataTypes.STRING,
-    price: DataTypes.DECIMAL
-=======
+
   };
   Coffee.init({
     coffee_id: {
@@ -45,17 +38,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     }
->>>>>>> routes
+
   }, {
     sequelize,
     modelName: 'Coffee',
   });
-<<<<<<< HEAD
-  return coffees;
-};
-=======
   return Coffee;
 };
 
 //Added price to coffee models UIR
->>>>>>> routes
