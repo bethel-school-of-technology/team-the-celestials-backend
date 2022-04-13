@@ -10,16 +10,24 @@ router.get('/', function(req, res, next) {
   });
 
 /* POST makes a new coffee*/
-router.post('/', (req, res, next) => {
-    Coffee.create ({
+router.post('/', (req, res) => {
+     Coffee.create ({
         nameOfCoffee: req.body.nameOfCoffee,
         ingridients: req.body.ingridients,
         price: req.body.price,
         img_url: req.body.img_url
     }).then(newCoffee => {
         res.json(newCoffee);
-    }).catch(() => {
-        res.status(400);
-    });
+       }).catch((err) => {
+        console.log(err);
+        res.status(400).send(err);
+       });
+    
+    // then(newCoffee => {
+    //     console.log(newCoffee);
+    //     res.json(newCoffee);
+    // }).catch(() => {
+    //     res.status(400);
+    // });
 });
 module.exports = router;
