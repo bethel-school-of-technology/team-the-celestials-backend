@@ -10,21 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-    // this.hasMany(models.Orders, {
-    //   foreignKey:'id'
-    // })
+      
     }
 
   };
   Coffee.init({
-    coffee_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
     nameOfCoffee: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     ingridients: {
       type: DataTypes.STRING,
