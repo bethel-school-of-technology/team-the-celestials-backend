@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
 
   };
   Coffee.init({
+    coffee_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     nameOfCoffee: {
       type: DataTypes.STRING,
       allowNull: true
