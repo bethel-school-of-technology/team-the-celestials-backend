@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      coffee_id: {
-        type: Sequelize.INTEGER
-      },
+      // coffee_id: {
+      //   type: Sequelize.INTEGER
+      // },
       nameOfCoffee: {
         type: Sequelize.STRING
       },
