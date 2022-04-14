@@ -9,12 +9,12 @@ router.get('/', function(req, res, next) {
 
 //POST Sing up User
 router.post('/', (req, res, next) => {
-  if(!req.body.username || !req.body.password){
-    res.status(400).send('Username and Password required');
-    return;
-  }
+  // if(!req.body.email || !req.body.password){
+  //   res.status(400).send('Username and Password required');
+  //   return;
+  // }
 
-user.create({
+User.create({
   firstName: req.body.firstName,
   lastName: req.body.lastName,
   email: req.body.email,
