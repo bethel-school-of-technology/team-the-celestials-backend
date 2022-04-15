@@ -7,15 +7,21 @@ module.exports = (sequelize, DataTypes) => {
    
     static associate(models) {
      this.belongsTo(models.User, {
-      foreignKey:'id'
+      foreignKey:'user_id'
     });
      this.hasMany(models.Coffee, {
-      foreignKey:'id'
+      foreignKey:'coffee_id'
     })
     }
   }
   Orders.init({
-    cartItems: DataTypes.STRING
+    order_id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    cartItems: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Orders',
