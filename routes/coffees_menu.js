@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 /* POST makes a new coffee*/
 router.post('/', (req, res) => {
      Coffee.create ({
+        coffee_id: req.body.coffee_id,
         nameOfCoffee: req.body.nameOfCoffee,
         ingridients: req.body.ingridients,
         price: req.body.price,
