@@ -22,12 +22,5 @@ router.post('/', (req, res) => {
         console.log(err);
         res.status(400).send(err);
        });
-    
-    // then(newCoffee => {
-    //     console.log(newCoffee);
-    //     res.json(newCoffee);
-    // }).catch(() => {
-    //     res.status(400);
-    // });
 });
 module.exports = router;
