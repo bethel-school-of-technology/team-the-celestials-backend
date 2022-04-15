@@ -5,7 +5,7 @@
             "nameOfCoffee":"Heavenly Cappacino",
             "ingridients": "Cappacino, Almond Milk",
             "price": "$5.35",
-            "image_url": "https://media.istockphoto.com/photos/cappuccino-picture-id173245886?b=1&k=20&m=173245886&s=170667a&w=0&h=YSj1U323schKOIu8FuSgZYFGvgegAFR1NtQCA09jP9c="
+            "img_url": "https://media.istockphoto.com/photos/cappuccino-picture-id173245886?b=1&k=20&m=173245886&s=170667a&w=0&h=YSj1U323schKOIu8FuSgZYFGvgegAFR1NtQCA09jP9c="
         },
 
         {
@@ -13,14 +13,14 @@
             "nameOfCoffee":"Frappe of Faith",
             "ingridients": "Mocha Blended Frappucino, whole milk, whipped cream",
             "price": "$5.50",
-            "image_url": "https://media.istockphoto.com/photos/frappe-coffee-picture-id1020383174?k=20&m=1020383174&s=612x612&w=0&h=Nm2Pa_rAlNKIfKV6aMgh4nX9gO_Rlk-Iab_NigD1xrI="
+            "img_url": "https://media.istockphoto.com/photos/frappe-coffee-picture-id1020383174?k=20&m=1020383174&s=612x612&w=0&h=Nm2Pa_rAlNKIfKV6aMgh4nX9gO_Rlk-Iab_NigD1xrI="
         },
         {
             "id":2,
             "nameOfCoffee": "Taste of Heaven",
             "ingridients": "Cold Foam Cascara Cold Brew Coffee",
             "price": "$5.25",
-            "image_url": "https://globalassets.starbucks.com/assets/321769bde2d842ed9eaf406c1480b7b2.jpg?impolicy=1by1_wide_topcrop_630"
+            "img_url": "https://globalassets.starbucks.com/assets/321769bde2d842ed9eaf406c1480b7b2.jpg?impolicy=1by1_wide_topcrop_630"
         },
 
         {
@@ -28,7 +28,7 @@
             "nameOfCoffee": "Jesus Java",
             "ingridients": "Nitro Cold Brew Coffee, Sweet Cream",
             "price": "$4.50",
-            "image_url": "https://globalassets.starbucks.com/assets/07951b9a7d7d47a2892dfa7a707fd318.jpg?impolicy=1by1_wide_topcrop_630"
+            "img_url": "https://globalassets.starbucks.com/assets/07951b9a7d7d47a2892dfa7a707fd318.jpg?impolicy=1by1_wide_topcrop_630"
         },
 
         {
@@ -36,7 +36,7 @@
             "nameOfCoffee": "Greener Pastures Tea",
             "ingridients": "Chamomile Flower, Essential Oil, Herbal Honey",
             "price": "$5.50",
-            "image_url": "https://cdn.cdnparenting.com/articles/2018/05/516958690-H.webp"
+            "img_url": "https://cdn.cdnparenting.com/articles/2018/05/516958690-H.webp"
         },
 
         {
@@ -44,7 +44,7 @@
             "nameOfCoffee": "Spiritual Refresher",
             "ingridients": "Peach Mango Juice, Dragon Fruit Energy Drink",
             "price": "$5.25",
-            "image_url": "https://juliesfamilykitchen.com/wp-content/uploads/2021/11/Mango-Dragonfruit-Refresher-recipe-Starbucks-Copycat-500x500.jpg"
+            "img_url": "https://juliesfamilykitchen.com/wp-content/uploads/2021/11/Mango-Dragonfruit-Refresher-recipe-Starbucks-Copycat-500x500.jpg"
         }
     ]
 
