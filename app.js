@@ -8,6 +8,7 @@ var models = require('./models');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var ordersRouter = require('./routes/orders');
 var coffeesRouter = require('./routes/coffees_menu');
 
 // MVC - models, views & controllers
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 app.use('/coffees', coffeesRouter);
+app.use('/orders', ordersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -49,7 +51,7 @@ app.use(function (err, req, res, next) {
 });
 
 models.sequelize
-  .sync({ alter: true })
+  .sync({ force: true })
   .then(function () {
     console.log("DB Sync'd up")
   })

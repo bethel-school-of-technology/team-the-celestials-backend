@@ -7,8 +7,11 @@ module.exports = (sequelize, DataTypes) => {
    
     static associate(models) {
      this.belongsTo(models.User, {
-      foreignKey:'user_id'
+      foreignKey:'user_id',
+      targetKey: "user_id"
     });
+
+
      this.hasMany(models.Coffee, {
       foreignKey:'coffee_id'
     })

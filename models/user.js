@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     
     static associate(models) {
       this.hasMany(models.Orders, {
-        foreignKey:'order_id'
+        foreignKey:'user_id'
       })   
     }
   };
@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
     password: DataTypes.STRING
   }, {
     sequelize,
