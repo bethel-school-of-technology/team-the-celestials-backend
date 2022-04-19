@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
 
-     this.hasMany(models.Coffee, {
-      foreignKey:'coffee_id'
+     this.belongsToMany(models.Coffee, {
+      //foreignKey:'coffee_id'
     })
     }
   }
