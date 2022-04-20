@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
      this.belongsToMany(models.Coffee, {
-      //foreignKey:'coffee_id'
+      through: 'CoffeeOrder'
     })
     }
   }
