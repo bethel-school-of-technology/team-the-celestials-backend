@@ -1,9 +1,24 @@
 var express = require('express');
 var router = express.Router();
 const { Coffee } = require('../models');
+var cors = require('cors'); 
+
+router.use(cors()) 
 /* GET all coffees*/
 
-router.get('/', function(req, res, next) {
+
+//router.get("/", function (req, res) {
+  //res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+
+  //models.User.findAll({}).then(response => {
+   // res.json(response)
+  //})
+
+//});
+
+
+
+router.get('/coffeemenu', function(req, res, next) {
    Coffee.findAll().then(coffeeMenu => {
     res.json(coffeeMenu);
    })
