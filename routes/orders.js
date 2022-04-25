@@ -9,7 +9,12 @@ router.use(cors())
 router.get("/", function (req, res) {
    res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
  
-   models.User.findAll({}).then(response => {
+   models.User.findOne({
+     where: { 
+       user_id:req.params.id,
+       include: 'Orders'
+         }
+   }).then(response => {
      res.json(response)
    })
  
