@@ -1,59 +1,61 @@
 var express = require('express');
-
-var router = express.Router();
 var models = require("../models");
+const { User } = require('../models');
+var router = express.Router();
+var authService = require('../services/auth');
 var cors = require('cors');
 
 router.use(cors()) 
 
 
-
-// POST signup UIR
-router.post('/', function (req, res, next) {
-
-  // let parsedNum = parseInt(req.body.)
-
-  models.User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    phoneNumber: req.body.phoneNumber,
-    password: req.body.password,
-  }).then(response => {
-    res.json(response)
-  }).catch(error => {
-    console.log(error)
-  })
-});
-
-
-//To connect with front in case localhost3000 does not work UIR
-router.get("/", function (req, res) {
+// SIGNUP a new user
+router.post('/signup', (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 
-  models.User.findAll({}).then(response => {
-    res.json(response)
-  })
+  if (!req.body.email || !req.body.password) {
+    res.status(400).render('error');
+    return;
+  }
 
-});
-
-//POST Sign in User UIR
-router.get('/getOne', function (req, res, next) {
-  models.user
-    .findOne({
-      where: {
+    User.create({
+        user_id: req.body.user_id,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
         password: req.body.password
-      }
-    })
-    .then(User => {
-      if (User) {
-        res.send('Welcome!');
-      } else {
-        res.send('Wrong Password!');
-      }
+    }).then(newUser => {
+      res.json(newUser);
+    }).catch(() => {
+      res.status(400).send();
     });
 });
+
+// Login user and return JWT as cookie
+router.post('/login', function (req, res, next) {
+  User.findOne({
+    where: {
+      Email: req.body.email,
+      Password: req.body.password
+    }
+  }).then(user => {
+    if (!user) {
+      console.log('User not found')
+      return res.status(401).json({
+        message: "Login Failed"
+      });
+    }
+    if (user) {
+      let token = authService.signUser(user); // <--- Uses the authService to create jwt token
+      res.cookie('jwt', token); // <--- Adds token to response as a cookie
+      res.send('Login successful');
+    } else {
+      console.log('Wrong password');
+      res.redirect('login')
+    }
+  });
+});
+
 
 //Update user account  UIR
 router.put('/:id', function (req, res, next) {
@@ -65,6 +67,7 @@ router.put('/:id', function (req, res, next) {
   // }
 
   models.User.update({
+    user_id: req.body.user_id,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
