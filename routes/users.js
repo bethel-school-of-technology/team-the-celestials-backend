@@ -4,54 +4,60 @@ const { User } = require('../models');
 var router = express.Router();
 var authService = require('../services/auth');
 var cors = require('cors');
-
+var bcrypt = require('bcrypt');
 router.use(cors()) 
 
 
 // SIGNUP a new user
-router.post('/signup', (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 
   if (!req.body.email || !req.body.password) {
     res.status(400).render('error');
     return;
   }
+//hash Password
+const salt = await bcrypt.genSalt(10);
+const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     User.create({
-        user_id: req.body.user_id,
+       // user_id: req.body.user_id,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
-        password: req.body.password
+        password: hashedPassword
     }).then(newUser => {
-      res.json(newUser);
+      res.json({
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        email: newUser.email,
+        phoneNumber: newUser.phoneNumber
+      });
     }).catch(() => {
       res.status(400).send();
     });
 });
 
 // Login user and return JWT as cookie
-router.post('/login', function (req, res, next) {
+router.post('/login', async (req, res, next) => {
   User.findOne({
     where: {
-      Email: req.body.email,
-      Password: req.body.password
+      email: req.body.email
     }
-  }).then(user => {
+  }).then( async user => {
+  //check if user exists
     if (!user) {
-      console.log('User not found')
-      return res.status(401).json({
-        message: "Login Failed"
-      });
+      res.status(404).send('Invalid username');
+      return;
     }
-    if (user) {
-      let token = authService.signUser(user); // <--- Uses the authService to create jwt token
-      res.cookie('jwt', token); // <--- Adds token to response as a cookie
-      res.send('Login successful');
-    } else {
-      console.log('Wrong password');
-      res.redirect('login')
+  // check password
+    const valid = await bcrypt.compare(req.body.password, user.password);
+    if (valid){
+      //Create token
+      res.status(200).send('Hi ' + user.firstName)
+    }else {
+      res.status(401).send('invalid Password')
     }
   });
 });
