@@ -18,6 +18,7 @@ module.exports = {
   },
   verifyUser: (token) => {
     const decodedPayload = jwt.verify(token, secreteKey);
-    return User.findByPk(decodedPayload.user_id);
+    console.log('decoded', decodedPayload);
+    return User.findByPk(decodedPayload.id);
   }
 };
