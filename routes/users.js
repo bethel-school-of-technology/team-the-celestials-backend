@@ -18,8 +18,7 @@ router.post('/signup', async (req, res, next) => {
     return;
   }
 //hash Password
-const salt = await bcrypt.genSalt(10);
-const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
 
     User.create({
        // user_id: req.body.user_id,
@@ -59,7 +58,7 @@ router.post('/login', async (req, res, next) => {
     if (valid){
       //Create token
       const jwt = auth.createJWT(user);
-      res.status(200).send('Hi ' + user.firstName)
+      res.status(200).send(user.firstName)
     }else {
       res.status(401).send('invalid Password')
     }

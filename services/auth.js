@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const models = require('../models');
+const { User } = require('../models');
 
 const secreteKey = 'celestials';
 
@@ -15,5 +16,8 @@ module.exports = {
     });
     return token;
   },
-  verifyUser: () => {}
+  verifyUser: (token) => {
+    const decodedPayload = jwt.verify(token, secreteKey);
+    return User.findByPk(decodedPayload.user_id);
+  }
 };
