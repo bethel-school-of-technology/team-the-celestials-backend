@@ -5,11 +5,11 @@ var router = express.Router();
 var authService = require('../services/auth');
 var cors = require('cors');
 var bcrypt = require('bcrypt');
-const auth = require('../services/auth');
+var auth = require('../services/auth');
 router.use(cors()) 
 
 
-// SIGNUP a new user
+//** SING UP **//
 router.post('/signup', async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 
@@ -18,10 +18,10 @@ router.post('/signup', async (req, res, next) => {
     return;
   }
 //hash Password
-
+const salt = await bcrypt.genSalt(10);
+const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     User.create({
-       // user_id: req.body.user_id,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -34,14 +34,14 @@ router.post('/signup', async (req, res, next) => {
         email: newUser.email,
         phoneNumber: newUser.phoneNumber
       }
-      //iclude orders asosiation
+ 
       );
     }).catch(() => {
       res.status(400).send();
     });
 });
 
-// Login user and return JWT as cookie
+//** LOG IN **//
 router.post('/login', async (req, res, next) => {
   User.findOne({
     where: {
@@ -58,36 +58,47 @@ router.post('/login', async (req, res, next) => {
     if (valid){
       //Create token
       const jwt = auth.createJWT(user);
-      res.status(200).send(user.firstName)
-    }else {
+      res.status(200).send({jwt})
+    }
+         //iclude orders asosiation
+    else {
       res.status(401).send('invalid Password')
     }
   });
 });
 
 
-//Update user account  UIR
-router.put('/:id', function (req, res, next) {
-  const user_id = parseInt(req.params.id);
+//** UPDATE **//
+router.put('/updateProfile', async (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 
-  // if (!user_id || user_id <= 0) {
-  //   res.status(400).send('Invalid User');
-  //   return;
-  // }
+  //Get token from the request
+const header = req.headers.authorization;
 
-  models.User.update({
-    user_id: req.body.user_id,
+if (!header) {
+  res.status(403).send();
+  return;
+}
+const token = header.split(' ')[1];
+
+  //validate token / get the user
+ const User = await auth.verifyUser(token);
+ 
+ if (!User) {
+  res.status(403).send();
+  return;
+ }
+
+  //update user with the user id
+
+  User.update({
+    
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
-    password: req.body.password,
-  },{
-    where: {
-      user_id: user_id
-    }
   }).then(() => {
-    res.status(204).send("Updated Completed :)");
+    res.json({User});
   }).catch((err) => {
     res.send({
       error: err,
@@ -99,18 +110,32 @@ router.put('/:id', function (req, res, next) {
 
 
 
-//DELETE Delete User account
-router.delete('/:id', (req, res, next) => {
-  const user_id = parseInt(req.params.id);
+//** DELTE **/
+router.delete('/delete', async (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 
-  if (!user_id || user_id <= 0) {
-    res.status(400).send('Invalid User');
-    return;
-  }
+  //Get token from the request
+const header = req.headers.authorization;
 
-  models.User.destroy({
+if (!header) {
+  res.status(403).send();
+  return;
+}
+const token = header.split(' ')[1];
+
+  //validate token / get the user
+ const User = await auth.verifyUser(token);
+ 
+ if (!User) {
+  res.status(403).send();
+  return;
+ }
+
+  //Delete user
+
+  User.destroy({
     where: {
-      user_id: user_id
+      user_id: id
     }
   }).then(() => {
     res.status(204).send();
