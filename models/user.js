@@ -34,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    password: DataTypes.STRING,
     createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
-    password: DataTypes.STRING
+    updatedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',
