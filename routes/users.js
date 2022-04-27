@@ -113,10 +113,9 @@ const token = header.split(' ')[1];
 //** DELTE **/
 router.delete('/delete', async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-
   //Get token from the request
 const header = req.headers.authorization;
-
+const user_id = User.user_id
 if (!header) {
   res.status(403).send();
   return;
@@ -135,7 +134,7 @@ const token = header.split(' ')[1];
 
   User.destroy({
     where: {
-      user_id: id
+      user_id: user_id
     }
   }).then(() => {
     res.status(204).send();
