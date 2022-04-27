@@ -1,20 +1,19 @@
 const jwt = require('jsonwebtoken');
 const models = require('../models');
 
-var authService = {
-  signUser: function(user) {
-    const token = jwt.sign(
-      {
-        Email: user.email,
-        UserId: user.user_Id
-      },
-      'secretkey',
-      {
-        expiresIn: '1h'
-      }
-    );
-    return token;
-  }
-}
+const secreteKey = 'celestials';
 
-module.exports = authService;
+
+module.exports = {
+  createJWT: (user) => {
+    const token = jwt.sign({
+      email: user.email,
+      id: user.user_id
+    },
+    secreteKey, {
+      expiresIn: '1h'
+    });
+    return token;
+  },
+  verifyUser: () => {}
+};

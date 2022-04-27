@@ -5,6 +5,7 @@ var router = express.Router();
 var authService = require('../services/auth');
 var cors = require('cors');
 var bcrypt = require('bcrypt');
+const auth = require('../services/auth');
 router.use(cors()) 
 
 
@@ -33,7 +34,9 @@ const hashedPassword = await bcrypt.hash(req.body.password, salt);
         lastName: newUser.lastName,
         email: newUser.email,
         phoneNumber: newUser.phoneNumber
-      });
+      }
+      //iclude orders asosiation
+      );
     }).catch(() => {
       res.status(400).send();
     });
@@ -55,6 +58,7 @@ router.post('/login', async (req, res, next) => {
     const valid = await bcrypt.compare(req.body.password, user.password);
     if (valid){
       //Create token
+      const jwt = auth.createJWT(user);
       res.status(200).send('Hi ' + user.firstName)
     }else {
       res.status(401).send('invalid Password')
