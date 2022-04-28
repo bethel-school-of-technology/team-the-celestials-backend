@@ -17,17 +17,14 @@ This will install all de dependencies necesary to run the server
     sequilze db:create
     sequlize db:migrate
 
-3.- Create raw hard data for DB
-
-    inject the coffee menu items from the mockdb.json file in this project using the post route on the coffee_menu.js file. 
-
-   **If you need help with this step, please contact one of the contributors on git hub**
-
-4.- Start the DB server
+3.- Start the DB server
 
     run - nodemon 
 
     this will start the db engine and it will run thru port localhost 3000
 
+4.- Create raw hard data for DB
 
+    inject the coffee menu items from the mockdb.json file in this project using the post route on the coffee_menu.js file. 
 
+   **If you need help with this step, please contact one of the contributors on git hub**
