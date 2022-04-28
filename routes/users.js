@@ -103,7 +103,6 @@ const token = header.split(' ')[1];
     res.send({
       error: err,
       status: res.status(400),
-      message: "update did not work lol"
     })
   })
 });
@@ -115,7 +114,7 @@ router.delete('/delete', async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
   //Get token from the request
 const header = req.headers.authorization;
-const user_id = User.user_id
+
 if (!header) {
   res.status(403).send();
   return;
@@ -129,7 +128,7 @@ const token = header.split(' ')[1];
   res.status(403).send();
   return;
  }
-
+ const user_id = User.user_id
   //Delete user
 
   User.destroy({
