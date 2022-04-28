@@ -23,8 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
-    },
-    cartItems: DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Orders',
