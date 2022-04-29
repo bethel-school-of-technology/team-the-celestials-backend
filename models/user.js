@@ -5,10 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     
-    static associate(models) {
-      this.belongsToMany(models.Coffee, { through: 'CoffeeOrder'
-      });   
-    }
+
   };
   User.init({
     user_id: {
