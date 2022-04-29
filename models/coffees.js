@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Orders, {
         through: 'CoffeeOrder'
       });
+      
 
     }
 

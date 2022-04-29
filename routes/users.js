@@ -29,6 +29,7 @@ const hashedPassword = await bcrypt.hash(req.body.password, salt);
         password: hashedPassword
     }).then(newUser => {
       res.json({
+        user_id: user_id,
         firstName: newUser.firstName,
         lastName: newUser.lastName,
         email: newUser.email,
@@ -50,7 +51,7 @@ router.post('/login', async (req, res, next) => {
   }).then( async user => {
   //check if user exists
     if (!user) {
-      res.status(404).send('Invalid username');
+      res.status(401).send('Invalid username');
       return;
     }
   // check password
@@ -58,7 +59,13 @@ router.post('/login', async (req, res, next) => {
     if (valid){
       //Create token
       const jwt = auth.createJWT(user);
-      res.status(200).send({jwt})
+      res.status(200).send({jwt, user:
+        {user_id: user.user_id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phoneNumber: user.phoneNumber}
+      })
     }
          //iclude orders asosiation
     else {
