@@ -5,17 +5,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var models = require('./models');
+var cors = require ('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ordersRouter = require('./routes/orders');
 var coffeesRouter = require('./routes/coffees_menu');
+const { argsArePrimaryKeys } = require('sequelize/lib/utils');
 
-// MVC - models, views & controllers
-// Infra: routing, binding, DI, middleware
 
 var app = express();
-
 
 
 // view engine setup
@@ -30,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', indexRouter);
 
+app.use(cors())
 app.use('/users', usersRouter);
 app.use('/coffees', coffeesRouter);
 app.use('/orders', ordersRouter);
