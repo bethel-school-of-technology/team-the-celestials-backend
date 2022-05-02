@@ -23,7 +23,7 @@ router.get("/orderHistory", async (req, res) => {
   const usr = await auth.verifyUser(token)
   
   var uid = usr.user_id;
-  const salida = await models.Orders
+  const result = await models.Orders
     .findAll(
       { where: { 
         user_id: uid
